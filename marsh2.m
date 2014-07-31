@@ -13,10 +13,6 @@ p.sigma_E = 1.5*[6 6]; % See supplementary materials to paper
 % m = 15; % Choose intermediate value for illustrative purposes
 p.mu_g =  2.3976;
 p.sigma_g =  0.78795;
-% The solution to this system is near:
-%   x0 = [124.96   164.85]; n0 = [4.9258e+01      4.9258e+01];
-% or for p.x_opt = [171 171]:
-%   x0 = [161.88   161.88]; n0 = [48.154   48.154];
 
 % Mean and standard dev of underlying normal distribution
 p.v_g = exp(2*p.mu_g+p.sigma_g^2)*(exp(p.sigma_g^2)-1);
