@@ -2,9 +2,40 @@ function [f,gg] = calc_fg(p,x,n,x_crs);
 
 % -- [f,gg] = calc_fg(p,x,n,x_crs);
 %
-% The purpose of this function is to return f and g
-% integrated on the points specified in x_crs.
-% Integration by trapezoid method
+%
+% The purpose of this function is to return the probability
+% of arriving from each habitat (gg) at each date corresponding
+% to the dates specified in x_crs, and the probability of
+% being first in the queue (f), determined by integrating on
+% the grid specified by x_crs, at each date x_crs. Its
+% primary use is in calc_F, which is where the overall
+% probability of being first in the queue is calculated. The
+% integration is performed using the trapezoid method.
+%
+%
+% INPUTS
+%
+% p: The dictionary of parameter values. See marsh2.m for an
+% example of how to specify these.
+%
+% x: The hatching-date strategy being pursued by the
+% population. Row vector.
+%
+% n: The population size. Row vector.
+%
+% x_crs: A grid of arrival dates upon which the arrival
+% distribution is evaluated and the integration to evaluate
+% f is performed.
+%
+%
+% OUTPUTS
+%
+% f: The probabilities of being first in a territory queue
+% given the arrival dates in the corresponding x_crs.
+%
+% gg: The probabilities of arrival on the dates
+% corresponding x_crs.
+%
 
 h = length(x); % Number of habitats, traits
 pM = p.pM; % Dispersal probability matrix
@@ -21,7 +52,7 @@ if Nfn == 1;
     r = repmat(n.*calc_E(p,x),Ncrs,1).*gg;
     lam = r*pM.*repmat(p.s,Ncrs,1)./repmat(p.K,Ncrs,1);
     %cum_lam = del*cumtrapz(lam);
-    cum_lam = cumtrapz(x_crs,lam); % An alternative for unevenly spaced 
+    cum_lam = cumtrapz(x_crs',lam); % An alternative for unevenly spaced 
 else
     % Do first point
     cum_lam = zeros(1,h); % Integral from x_lo to x_lo = 0

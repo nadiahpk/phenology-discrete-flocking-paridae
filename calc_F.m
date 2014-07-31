@@ -1,5 +1,37 @@
 function F = calc_F(p,x,n,y);
 
+% -- F = calc_F(p,x,n,y);
+% -- F = calc_F(p,x,n);
+%
+%
+% The purpose of this function is to calculate the
+% probability that a juvenile from each habitat will be
+% first in the territory queue in each habitat.
+%
+%
+% INPUTS
+%
+% p: The dictionary of parameter values. See marsh2.m for an
+% example of how to specify these.
+%
+% x: The hatching-date strategy being pursued by the
+% population ("resident strategy"). Row vector.
+%
+% n: The population size. Row vector.
+%
+% y: The hatching-date strategy being pursued by the
+% variant ("mutant strategy"). Row vector. Optional.
+%
+%
+% OUTPUTS
+%
+% F: The probability of being first in the queue for an
+% individual travelling from habitat i (row) to habitat j
+% (column). Depending upon whether y is specified, it is
+% calculated either for a resident or mutant invader.
+%
+
+
 h = length(x); % Number of habitats, traits
 
 intsteps_method = 1; % 0: simple evenly spaced
@@ -21,14 +53,22 @@ if intsteps_method == 0 % Evenly spaced option
 
 elseif intsteps_method == 1 % More complicated option
 
-    % This code is a bit messy still. The basic idea is that I use an adatpive simpson's integration to figure out where good places to put the integration grid points is, and then I run through those points for each arrival distribution selecting the grid with the closest spacing at each time interval.
+    % This more-complicated approach became necessary when
+    % the skew of the arrival distribution was very strong
+    % and the peak very sharp.
+    %
+    % Here an adaptive simpson's integration is used to
+    % figure out where are good places to put the
+    % integration grid points. The code then runs through
+    % those points for each arrival distribution, selecting
+    % the grid with the closest spacing at each time interval.
+
     x_hi = logninv(1-p.tol,p.mu_g,p.sigma_g);
 
     % Get a good spacing using the adaptive simpson's
-    [intval,b]=adapt_simp(@(x) lognpdf(x,p.mu_g,p.sigma_g),0,x_hi,1e-5); % adequate for most except when we get to mg < 7
-    %[intval,b]=adapt_simp(@(x) lognpdf(x,p.mu_g,p.sigma_g),0,x_hi,1e-6); 
+    [intval,b]=adapt_simp(@(x) lognpdf(x,p.mu_g,p.sigma_g),0,x_hi,p.adaptsimp);
     Ncrs = length(b);
-    % *** set that 1e-6 to some parameter
+
     % Determine spacing
     bb = b; bb(end)=[]; bb = [NaN,bb]; b_spacing = bb-b; 
 
@@ -99,5 +139,5 @@ for i = 1:h
         [a,start_i] = min(abs(xk-x(i))); 
     end
     gf = repmat(gg(start_i:end,i),1,h).*f(start_i:end,:);
-    F(i,:) = cumtrapz(xk(start_i:end),gf)(end,:);
+    F(i,:) = cumtrapz(xk(start_i:end)',gf)(end,:);
 end
