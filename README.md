@@ -28,42 +28,52 @@ will load the parameter dictionary p into the workspace.
 The default parameters have both habitats with the same
 plant phenology
 
-```> p.x_opt
-171   171```
+```
+> p.x_opt
+171   171
+```
 
 Let's change it so that the first habitat has a phenology
 five days earlier than the second habitat
 
-```> p.x_opt(1) = 171-5;
+```
+> p.x_opt(1) = 171-5;
 p.x_opt
 ans =
 
-   166   171 ```
+   166   171 
+```
 
 You can then define a good initial guess for the system's
 evolutionarily singular state. Let's say our first guess for the
 hatching dates in each habitat type is about 8 days earlier
 than the optimal hatching date
 
-```> x0 = [159 164];```
+```
+> x0 = [159 164];
+```
 
 and our first guess for the population size we'll set equal
 to the number of available territories in each habitat type
 
-```> n0 = p.K
+```
+> n0 = p.K
 n0 =
 
-  50   50 ```
+  50   50 
+```
 
 The solver can then be run,
 
-```> x=calc_x(p,x0,n0)
+```
+> x=calc_x(p,x0,n0)
 
 x = 158.81   163.11
 
 > n=calc_n(p,x,n0)
 
 n = 46.764   46.692
+```
 
 and this is our singular strategy hatching dates and
 population size respectively.
@@ -83,7 +93,8 @@ The solver needs a fairly good initial guess in order to succeed at finding the 
 Let's check the evolutionary stability of the singular
 strategy above. In the same workspace
 
-```> [eigH,eigJ,eigJs,Hess,Jac] = check_stab(p,x,n)
+```
+> [eigH,eigJ,eigJs,Hess,Jac] = check_stab(p,x,n)
 eigH = -0.0012491
 eigJ = -0.0018242
 eigJs = -0.0016523
@@ -95,7 +106,8 @@ Hess =
 Jac =
 
 -4.3088e-03   2.5307e-04
--1.0704e-03  -1.7152e-03 ```
+-1.0704e-03  -1.7152e-03 
+```
 
 The dominant eigenvalue of the Hessian matrix ```eigH``` is
 negative, so this singular strategy is a fitness maximum.
