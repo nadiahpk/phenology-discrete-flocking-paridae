@@ -38,7 +38,7 @@ five days earlier than the second habitat
 
 ```
 > p.x_opt(1) = 171-5;
-p.x_opt
+> p.x_opt
 ans =
 
    166   171 
@@ -118,11 +118,10 @@ strategy that is a continuously stable strategy (CSS).
 
 ## Reproduce Figure 2a
 
-First we'll read in the default parameter values supplied in
-```default_parameter_values.m```
+First we'll read in the default parameter values supplied 
 
 ```
-default_parameter_values
+> default_parameter_values
 ```
 
 We want to vary the landscape-composition parameter ```K```.
@@ -132,7 +131,7 @@ percent early habitat, so we create a matrix with each row
 corresponding to a point at which we'd like to solve the
 system, and the columns being early- and late-K
 ```
-parV = [linspace(20,80,13)',linspace(80,20,13)'];
+> parV = [linspace(20,80,13)',linspace(80,20,13)'];
 ```
 
 We need to start the system off with an initial guess for
@@ -140,7 +139,7 @@ the phenology and population size. The initial system is
 is when both habitats have the same plant phenology. Our
 initial guess of the mismatch in each trait is
 ```
-mm0=[-8.1471e+00     -8.0800e+00];
+> mm0=[-8.1471e+00     -8.0800e+00];
 ```
 meaning the early habitat will hatch 8.1 days earlier than
 the optimum, and the late habitat 8.08 days earlier than the
@@ -148,7 +147,7 @@ optium.
 
 Our initial guess for the population size is
 ```
-n0=[1.8549e+01      7.4211e+01];
+> n0=[1.8549e+01      7.4211e+01];
 ```
 which means 18.5 individuals in the early habitat (remember
 it starts with 20 territories, as defined in ```parV```) and 
@@ -158,7 +157,7 @@ territories).
 We can then use the function ```varypar.m``` to record the
 singular strategy at each point in our parameter range
 ```
-varypar(p,'K',parV,1,mm0,n0)
+> varypar(p,'K',parV,1,mm0,n0)
 ```
 The function in ```varypar.m``` produces an output file
 called (in this case) ```outputK_1.dat```. 
