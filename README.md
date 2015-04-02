@@ -94,25 +94,17 @@ Let's check the evolutionary stability of the singular
 strategy above. In the same workspace
 
 ```
-> [eigH,eigJ,eigJs,Hess,Jac] = check_stab(p,x,n)
+> [eigH,eigJ,eigJs,Hess,Jac] = check_stab(p,x,n);
+> eigH
 eigH = -0.0012491
-eigJ = -0.0018242
+> eigJs
 eigJs = -0.0016523
-Hess =
-
--3.6961e-03   1.6310e-05
-2.1677e-05  -1.2492e-03
-
-Jac =
-
--4.3088e-03   2.5307e-04
--1.0704e-03  -1.7152e-03 
 ```
 
 The dominant eigenvalue of the Hessian matrix ```eigH``` is
 negative, so this singular strategy is a fitness maximum.
 The dominant eigenvalue of Leimar's (2009) Jacobian
-matrix is negative, so the singular strategy is also
+matrix Js is negative, so the singular strategy is also
 an evolutionary attractor. Therefore we have found a singular
 strategy that is a continuously stable strategy (CSS).
 
