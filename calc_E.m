@@ -10,7 +10,8 @@ function E = calc_E(p,x)
 %
 % INPUTS 
 %
-% p: The dictionary of parameter values. See marsh2.m for an
+% p: The dictionary of parameter values. See
+% default_parameter_values.m for an
 % example of how to specify these.
 %
 % x: The hatching-date strategy being pursued by the

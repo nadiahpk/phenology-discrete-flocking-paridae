@@ -18,7 +18,8 @@ function df = calc_dfit(p,y,nn0,x,n_flag);
 %
 % INPUTS
 %
-% p: The dictionary of parameter values. See marsh2.m for an
+% p: The dictionary of parameter values. See
+% default_parameter_values.m for an
 % example of how to specify these.
 %
 % y: The hatching-date strategy being pursued by the
