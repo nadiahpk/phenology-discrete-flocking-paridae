@@ -1,12 +1,18 @@
-# Brief Description
+# Evolution of breeding phenology in a heterogeneous landscape
+
+## About the code
 
 Octave code to find the evolutionarily singular breeding-time strategy for a strict, discrete-flocking resident bird species (e.g. marsh tit) in a phenologically heterogenous landscape.
 
-# Reference
+## About the manuscript
 
-Kristensen, N.P., Johansson, J., Smith, H.G., Jonzen, N. Paper in preparation.
+Kristensen, N.P., Johansson, J., Jonzen, N., Smith, H.G. (2018) Evolution of resident bird breeding phenology in a landscape with heterogeneous resource phenology and carryover effects, *Evolutionary Ecology*
 
-# Quick Start
+** Abstract **
+
+It is generally expected that, in environments with pronounced seasonal resource peaks, birds' reproductive success will be maximised when nestlings' peak food demand coincides with the timing of high food availability. However in certain birds that stay resident over winter, earlier breeding leads juveniles to join the winter flock earlier, which by the prior residence effect increases their success in breeding territory competition. This trade-off between reproduction and competition may explain why, in certain species, breeding phenology is earlier and asynchronous with the resource. This study extends a previous model of the evolution of breeding phenology in a single habitat type to a landscape with two habitat types: 'early' and 'late' resource phenology. The offspring's natal habitat type has a carryover effect upon their competitive ability regardless of which habitat type they settle in to potentially breed. We find that, when the difference in resource phenology between habitats is small (weak carryover effect), breeding phenology in the late habitat evolves to occur earlier and more asynchronously than in the early habitat, to compensate for the competitive disadvantage to juveniles raised there. However if the difference is large (strong carryover effect), then the reproductive cost of earlier breeding outweighs the benefit of the compensation, so instead breeding phenology in the late habitat evolves to become more synchronous with the resource. Recruitment is generally asymmetric, from early to late habitat type. However if the early habitat is less frequent in the landscape or produces fewer offspring, then the asymmetry is reduced, and if there is some natal habitat-type fidelity, then recruitment can have an insular pattern, i.e. most recruits to each habitat type come from that same habitat type. We detail the different scenarios in which the different recruitment patterns are predicted, and we propose that they have implications for local adaptation.
+
+## Code quick Start
 
 If you have git:
 
@@ -17,7 +23,7 @@ If you don't have git, just download and unpack the latest zip file:
 
 [https://github.com/nadiahpk/phenology-discrete-flocking-paridae/archive/master.zip](https://github.com/nadiahpk/phenology-discrete-flocking-paridae/archive/master.zip)
 
-## Find an evolutionarily singular strategy
+### Find an evolutionarily singular strategy
 
 In Octave,
 
@@ -78,7 +84,7 @@ n = 46.764   46.692
 and this is our singular strategy hatching dates and
 population size respectively.
 
-## Issues
+### Issues
 
 The solver needs a fairly good initial guess in order to succeed at finding the singular strategy. Some helpful tips:
 
@@ -86,9 +92,9 @@ The solver needs a fairly good initial guess in order to succeed at finding the 
 * The biologically reasonable system will be close to saturated, so you can often use ```K``` as a good initial guess for ```n```.
 * Do you already know the singular strategy nearby in the parameter space? Perhaps start there and work your way slowly to the area of interest. If you are sweeping the parameter space, it's a good idea to go through incrementally, using the mismatch of the singular strategy at the previous step as the initial guess for the next step.
 
-# Taking it further
+## Taking it further
 
-## Check the evolutionary stability of a singular strategy
+### Check the evolutionary stability of a singular strategy
 
 Let's check the evolutionary stability of the singular
 strategy above. In the same workspace
@@ -108,7 +114,7 @@ matrix Js is negative, so the singular strategy is also
 an evolutionary attractor. Therefore we have found a singular
 strategy that is a continuously stable strategy (CSS).
 
-## Reproduce Figure 2a
+### Reproduce Figure 2a
 
 First we'll read in the default parameter values supplied 
 
@@ -154,7 +160,7 @@ singular strategy at each point in our parameter range
 The function in ```varypar.m``` produces an output file
 called (in this case) ```outputK_1.dat```. 
 
-## Reproduce the stability checks corresponding to Figure 2a
+### Reproduce the stability checks corresponding to Figure 2a
 
 I have written a script ```check_stab_K_script.m``` that
 will check the stability of each singular strategy found in the example
